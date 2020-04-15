@@ -1,0 +1,154 @@
+\documentclass[12pt,a4j]{ltjarticle}
+\evensidemargin -0.3in
+\oddsidemargin -0.3in
+\topmargin -1.0in
+\textheight 10.2in
+\textwidth 6.9in
+\usepackage{color}
+\usepackage{amsmath}
+\newcommand{\bm}[1]{{\mbox{\boldmath $#1$}}}
+
+\title{一般化されたオームの法則}
+\author{堀田英之}
+
+\begin{document}
+\maketitle
+    \S 2.1.3に登場する, 一般化されたオームの法則の導出を示す. かなりの非自明な近似を使っており, 導出は極めて困難.    
+    ここでは教科書に沿って, 一価のプラズマについて考える. よって$n_i=n_e$.
+    電子, 水素イオン(陽子)の運動方程式をそれぞれ書き下すと, それぞれの粒子の電荷量を$-e$, $e$とする.
+    \begin{align}
+        \frac{\partial}{\partial t}\left(n_em_e\bm{v}_e\right) 
+        + \nabla\cdot\left(n_em_e\bm{v}_e\bm{v}_e\right) =&
+         - \nabla p_e -
+        en_e\left(\bm{E}+\bm{v}_e\times\bm{B}\right) + \bm{R}_{ei} + \bm{R}_{en} 
+        \label{eom_electron}
+        \\
+        \frac{\partial}{\partial t}\left(n_im_i\bm{v}_i\right) 
+        + \nabla\cdot\left(n_im_i\bm{v}_i\bm{v}_i\right) =&
+         - \nabla p_i + 
+        en_i\left(\bm{E}+\bm{v}_i\times\bm{B}\right) + \bm{R}_{ie} + \bm{R}_{in}
+        \label{eom_proton}
+    \end{align}
+    それぞれの粒子に対する連続の式
+    \begin{align}
+        \frac{\partial n_*}{\partial t} = -\nabla\cdot\left(n_*\bm{v}_*\right)
+    \end{align}
+    が成り立っているので, 
+    \begin{align}
+        n_*m_*
+        \left[
+        \frac{\partial \bm{v}_*}{\partial t} + \left(\bm{v}_*\cdot\nabla\right)\bm{v}_*
+        \right] = \frac{\partial}{\partial t}\left(n_*m_*\bm{v}_*\right) 
+        + \nabla\cdot\left(n_*m_*\bm{v}_*\bm{v}_*\right)
+    \end{align}
+    という関係が成り立っていることに注意.
+    ここで、一流体近似で用いられる速度$\bm{v}$, 電流密度$\bm{j}$を以下のように定義する
+    \begin{align}
+        \bm{v} =& \frac{n_em_e\bm{v}_e + n_im_i\bm{v}_i}{n_em_e + n_im_i} \sim
+        \frac{m_e\bm{v}_e + m_i\bm{v}_i}{m_e +m_i}\\
+        \bm{j} =& e\left(-n_e\bm{v}_e + n_i\bm{v}_i\right) \sim en_e \left(-\bm{v}_e + \bm{v}_i\right)
+    \end{align}
+    準中性条件から$n_e\sim n_i$を用いた.
+    また, $m_e<<m_i$を用いて以下の近似をおこなう.
+    \begin{align}
+        \bm{v} =& \frac{m_i}{m_e + m_i}\left(\frac{m_e}{m_i}\bm{v}_e + \bm{v}_i\right)\sim \bm{v}_i \label{total_velocity}\\
+        \bm{v}_e \sim& \bm{v}_i - \frac{\bm{j}}{en_e} \sim \bm{v} - \frac{\bm{j}}{en_e} \label{electron_velocity}
+    \end{align}
+    となる.
+    式(\ref{eom_proton})$\times m_e/m_i-$式(\ref{eom_electron})を実行すると
+    \begin{align}
+        \frac{m_e}{e}
+        \frac{\partial}{\partial t}
+        \left[
+        en_e\left(
+        -\bm{v}_e + \bm{v}_i
+        \right)
+        \right] +& 
+        \frac{m_e}{e}
+        \nabla\cdot
+        \left[
+            en_e
+            \left(
+            -\bm{v}_e\bm{v}_e + \bm{v}_i \bm{v}_i
+            \right)
+        \right] \nonumber   \\ =&
+        \nabla p_e 
+        -\frac{m_e}{m_i}\nabla p_i  +
+        en_e
+        \left(\bm{E}+\bm{v}_e\times\bm{B}\right)
+        + \frac{m_e}{m_i}en_i
+        \left(\bm{E}+\bm{v}_i\times\bm{B}\right) \nonumber\\
+        &+ \bm{R}_{ei} + \bm{R}_{en} + 
+        \frac{m_e}{m_i}\left(\bm{R}_{ie} + \bm{R}_{in}\right)
+    \end{align}
+    左辺第二項の$\nabla\cdot$の中身を式(\ref{total_velocity})と(\ref{electron_velocity})を用いて変形する.
+    \begin{align}
+        en_e\left(-\bm{v}_e\bm{v}_e + \bm{v}_i\bm{v}_i\right) =& en_e
+        \left[
+            -\left(\bm{v}-\frac{\bm{j}}{en_e}\right)\left(\bm{v}-\frac{\bm{j}}{en_e}\right)
+            + \bm{v}\bm{v}
+        \right] \nonumber\\
+        =& \bm{v}\bm{j} + \bm{j}\bm{v} + \frac{\bm{jj}}{en_e}
+    \end{align}
+    最後の項はPriestの教科書では無視されているように見える. 無視する妥当性はよくわからない. 右辺第三項は, 式(\ref{electron_velocity})を代入して, 
+    \begin{align}
+        en_e\left(\bm{E}+\bm{v}_e\times\bm{B}\right) = en_e
+        \left(
+            \bm{E} + \bm{v}\times\bm{B} - \frac{\bm{j}}{en_e}\times\bm{B}
+        \right)
+    \end{align}
+    電子と水素イオンの衝突項は, 一般に以下のように表される.
+    \begin{align}
+        \bm{R}_{ei} =& \frac{n_em_e\left(\bm{v}_i-\bm{v}_e\right)}{\tau_{ei}} \\
+        \bm{R}_{ie} =& \frac{n_im_i\left(\bm{v}_e-\bm{v}_i\right)}{\tau_{ie}}
+    \end{align}
+    作用反作用を考えると$\bm{R}_{ei}=\bm{R}_{ie}$なので, $m_e/m_i\bm{R}_{ie}$の項は無視できることがわかる.
+    ここで衝突項は以下のように変形できる.
+    \begin{align}
+        \bm{R}_{ei} = \frac{m_e}{e\tau_{ei}}\bm{j} = \frac{m_e}{eB}\frac{1}{\tau_{ei}}B\bm{j} = 
+        \frac{B\bm{j}}{\Omega_{e}\tau_{ei}}
+    \end{align}
+    ここで, $\Omega_e=eB/m_e$は電子のジャイロ振動数(磁場$B$の下で円運動するときの振動数)である.
+    電子と中性粒子の衝突項は, $\bm{v}_n\sim\bm{v}_i$が仮定されていると思われる. そうすると電子とイオンの衝突項と同様に
+    \begin{align}
+        \bm{R}_{en} = \frac{B\bm{j}}{\Omega_e \tau_{en}}
+    \end{align}
+    と書くことができる.
+    \\
+    ここまでをまとめると,
+    \begin{align}
+        \frac{m_e}{e}
+        \left[
+        \frac{\partial\bm{j}}{\partial t} + \nabla\cdot\left(\bm{vj}+\bm{jv} + \frac{\bm{jj}}{en_e}\right)
+        \right] = en_e\left(\bm{E}+\bm{v}\times\bm{B} + \frac{\nabla p_e}{en_e}\right) - \bm{j}\times\bm{B}
+        +
+        \left(
+        \frac{1}{\Omega_e\tau_{ei}} + \frac{1}{\Omega_e\tau_{en}}
+        \right)B\bm{j}
+    \end{align}
+    となる.\\
+    最後の項はプラズマと中性粒子の相互作用によるもの. ここからは, 非常に
+    一流体近似したときの運動方程式を書き下すと以下のようになる.
+    \begin{align}
+        \rho\left[
+        \frac{\partial \bm{v}}{\partial t} + 
+        \left(
+            \bm{v}\cdot\nabla
+        \right)\bm{v}
+        \right] = -\nabla p + \bm{j}\times\bm{B} + \bm{R}_{in}
+    \end{align}
+    ここで一流体となった場合でも, 運動量のほとんどは水素イオンが担うので, 衝突項はイオンと中性粒子のものを考えた.
+    ここでは, 圧力勾配力, ローレンツ力, 衝突項が釣り合っていると考える.
+    衝突項をどのようにすればいいかよくわからないが, Priestの教科書では以下のように定義しているように見える。これはスタンダードな方法ではないだろう.
+    \begin{align}
+        \bm{R}_{in} = -\frac{\left(n_a+n_e\right)^2}{n_a^2e}\frac{m_e}{\tau_{in}}
+        \left(\bm{v}_n - \bm{v}_i\right)
+    \end{align}
+    誘導電場は$\bm{v}\times\bm{B}$であるが, 中性粒子によるドリフトを考えると
+    誘導電場は$\bm{v}_i\sim\bm{v}$を考慮すると
+    \begin{align}
+        \bm{v}\times\bm{B} = \bm{v}_n\times\bm{B} + \frac{n_a^2}{\left(n_a + n_e\right)^2}\frac{\tau_{in} e}{m_e}\left[\nabla p\times\bm{B} - \left(\bm{j}\times\bm{B}\right)\times\bm{B}\right],
+    \end{align}
+    となり, 誘導電場に最後の項を足すのが良いことがわかる. 教科書の一般化されたオームの法則が証明可能になる(中性粒子との衝突項はかなり怪しいが). 一般的な教科書では, 違う導き方をしているよう.
+
+\end{document}
